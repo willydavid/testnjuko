@@ -9,10 +9,12 @@
 
 namespace Application;
 
+use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+use Zend\ModuleManager\Feature\FormElementProviderInterface;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
-class Module
+class Module implements AutoloaderProviderInterface, FormElementProviderInterface
 {
     public function onBootstrap(MvcEvent $e)
     {
@@ -26,14 +28,43 @@ class Module
         return include __DIR__ . '/config/module.config.php';
     }
 
+
     public function getAutoloaderConfig()
     {
         return array(
+            'Zend\Loader\ClassMapAutoloader' => array(
+                __DIR__ . '/autoload_classmap.php',
+            ),
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
+                    __NAMESPACE__ => __DIR__ . '/src/' . str_replace('\\', '/', __NAMESPACE__)
                 ),
             ),
+        );
+    }
+
+    public function getFormElementConfig() {
+        return array(
+            'factories' => array(
+                'form.user' => function ($fem) {
+                    $em = $fem->getServiceLocator()->get('entity_manager');
+
+                    $form = new \Application\Form\UserForm();
+                    $form->setHydrator(new \DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity($em, 'Application\Entity\User'))
+                        ->setObjectManager($em)
+                        ->setObject(new \Application\Entity\User)
+                        ->setInputFilter(new \Application\Form\Filter\UserForm($fem->getServiceLocator()));
+                    return $form;
+                },
+            )
+        );
+    }
+
+    public function getServiceConfig() {
+        return array(
+            'invokables' => array(
+                'application.service.user' => 'Application\Service\UserService'
+            )
         );
     }
 }

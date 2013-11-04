@@ -156,4 +156,29 @@ class User extends EntityAbstract
     }
 
 
+    public function setFirstname($firstname)
+    {
+        if(!is_object($this->getProfile()))
+        {
+            $this->setProfile(new Profile());
+        }
+
+        $this->getProfile()->setFirstName($firstname);
+    }
+
+    public function setLastname($lastname)
+    {
+        if(!is_object($this->getProfile()))
+        {
+            $this->setProfile(new Profile());
+        }
+
+        $this->getProfile()->setLastName($lastname);
+    }
+
+    public function getFirstName()
+    {
+        return $this->getProfile()->getFirstName();
+    }
+
 }

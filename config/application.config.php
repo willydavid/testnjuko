@@ -23,7 +23,7 @@ return array(
         // modules are loaded. These effectively override configuration
         // provided by modules themselves. Paths may use GLOB_BRACE notation.
         'config_glob_paths' => array(
-            'config/autoload/{,*.}{global,local}.php',
+            'config/autoload/{,*.}{global,local,' . getenv('APPLICATION_ENV') . '}.php',
         ),
 
         // Whether or not to enable a configuration cache.
@@ -63,5 +63,9 @@ return array(
 
    // Initial configuration with which to seed the ServiceManager.
    // Should be compatible with Zend\ServiceManager\Config.
-   // 'service_manager' => array(),
+   'service_manager' => array(
+       'aliases' => array(
+           'entity_manager' => 'Doctrine\Orm\EntityManager',
+       ),
+   ),
 );

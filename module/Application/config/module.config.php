@@ -51,6 +51,47 @@ return array(
                     ),
                 ),
             ),
+            'users' =>  array(
+                'type'  =>  'Literal',
+                'options'   =>  array(
+                    'route' =>  '/users',
+                    'defaults'  =>  array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'User',
+                        'action'        => 'list',
+                    )
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'add' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/add',
+                            'defaults' => array(
+                                'action'    =>  'add'
+                            ),
+                        ),
+                    ),
+                    'remove' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/remove/:user_id',
+                            'defaults' => array(
+                                'action'    =>  'remove'
+                            ),
+                        ),
+                    ),
+                    'edit' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/edit/:user_id',
+                            'defaults' => array(
+                                'action'    =>  'edit'
+                            ),
+                        ),
+                    ),
+                ),
+            )
         ),
     ),
     'doctrine'        => array(
@@ -88,18 +129,19 @@ return array(
         ),
     ),
     'translator' => array(
-        'locale' => 'en_US',
+        'locale' => 'fr_FR',
         'translation_file_patterns' => array(
             array(
-                'type'     => 'gettext',
-                'base_dir' => __DIR__ . '/../language',
-                'pattern'  => '%s.mo',
-            ),
-        ),
+                'type' => 'phparray',
+                'base_dir' => __DIR__ . '/../../language',
+                'pattern' => '%s.php'
+            )
+        )
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\User' => 'Application\Controller\UserController'
         ),
     ),
     'view_manager' => array(
