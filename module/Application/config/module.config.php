@@ -1,4 +1,5 @@
 <?php
+namespace Application;
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -51,6 +52,31 @@ return array(
                 ),
             ),
         ),
+    ),
+    'doctrine'        => array(
+        'driver'       => array(
+            'application_driver'        => array(
+                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'cache' => 'array',
+                'paths' => array(
+                    __DIR__ . '/../src/' . __NAMESPACE__ . '/Entity',
+                ),
+
+            ),
+            'orm_default'               => array(
+                'drivers' => array(
+                    'Application\Entity'        => 'application_driver'
+                )
+            )
+        ),
+        'eventmanager' => array(
+            'orm_default' => array(
+                'subscribers' => array(
+
+                ),
+            ),
+        )
+
     ),
     'service_manager' => array(
         'abstract_factories' => array(
