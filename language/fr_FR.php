@@ -1,5 +1,7 @@
 <?php
 return array(
+    '__users_list'  =>  'Liste des utilisaturs',
+
     '__add_user'    =>  'Ajouter un utilisateur',
     '__remove_user' =>  'Supprimer',
     '__edit_user'   =>  'Modifier',
