@@ -9,7 +9,7 @@ return array(
                                         'port' => '3306',
                                         'user' => 'root',
                                         'charset' => 'UTF8',
-                                        'password' => '',
+                                        'password' => 'bibi6448',
                                         'dbname' => 'test-technique'
                                 )
                         )
