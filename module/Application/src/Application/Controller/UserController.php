@@ -62,14 +62,12 @@ class UserController extends AbstractActionController
     {
         //To do : Do Remove User
         
-        $idUser = $this->getEvent()->getRouteMatch()->getParam("users");
-        
-        var_dump($idUser); exit();
+        $idUser = $this->getEvent()->getRouteMatch()->getParam("user_id");
         
         $user = $this->getServiceLocator()->get('entity_manager')
             ->getRepository('Application\Entity\User')
             ->find($idUser);
-
+        
         if ($user instanceof \Application\Entity\User) {
             /* @var $serviceUser \Application\Service\UserService */
             $serviceUser = $this->getServiceLocator()->get('application.service.user');
@@ -91,6 +89,8 @@ class UserController extends AbstractActionController
 
         $form->bind($userToEdit);
         $form->get('firstname')->setValue($userToEdit->getFirstname());
+        
+        $form->get('lastname')->setValue($userToEdit->getLastName());
 
         $data = $this->prg();
 
@@ -106,6 +106,10 @@ class UserController extends AbstractActionController
                 $user = $form->getData();
 
                 //Save the user
+                /* @var $serviceUser \Application\Service\UserService */
+                $serviceUser = $this->getServiceLocator()->get('application.service.user');
+
+                $serviceUser->saveUser($user);
 
                 $this->redirect()->toRoute('users');
             }
