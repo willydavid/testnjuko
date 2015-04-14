@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Test technique njuko.com
 =======================
 
@@ -100,3 +101,7 @@ directory:
 
 This will start the cli-server on port 8080, and bind it to all network
 interfaces.
+=======
+# testnjuko
+Test d'entrée chez Njuko
+>>>>>>> db31243e67134bc3ea687071206c6ae90f44360e
