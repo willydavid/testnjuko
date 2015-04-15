@@ -57,7 +57,7 @@ class Profile extends EntityAbstract
      * @var string
      */
     protected $address;
-
+    
     /**
      * @var datetime $created
      *
@@ -156,7 +156,7 @@ class Profile extends EntityAbstract
     {
         return $this->address;
     }
-
+    
     /**
      * Set user
      *

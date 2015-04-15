@@ -19,8 +19,13 @@ class UserController extends AbstractActionController
 
         $users = $this->getServiceLocator()->get('entity_manager')
             ->getRepository('Application\Entity\User')
-            ->findAll();
-
+            ->findBy(array(), array('naissance' => 'asc'), $limite = null, $offset = null);
+        
+        $profiles = $this->getServiceLocator()->get('entity_manager')
+            ->getRepository('Application\Entity\Profile')
+            ->findBy(array(), array('lastname' => 'asc'), $limite = null, $offset = null);
+            //->findAll();
+        
         return new ViewModel(array(
             'users' =>  $users
         ));
@@ -90,7 +95,8 @@ class UserController extends AbstractActionController
         $form->bind($userToEdit);
         $form->get('firstname')->setValue($userToEdit->getFirstname());
         
-        $form->get('lastname')->setValue($userToEdit->getLastName());
+        $form->get('lastname')->setValue($userToEdit->getLastname());
+        $form->get('naissance')->setValue($userToEdit->getNaissance());
 
         $data = $this->prg();
 

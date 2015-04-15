@@ -29,15 +29,24 @@ class User extends EntityAbstract
     * @var string
     */
     protected $password;
-
+    
     /**
     *
-    * @ORM\OneToOne(targetEntity="Profile",fetch="LAZY" , cascade={"persist","merge","detach"})
+    * @ORM\OneToOne(targetEntity="Profile", inversedBy="user", fetch="LAZY" , cascade={"persist","merge","detach"})
     *
     * @var Profile
     */
     protected $profile;
 
+    
+    /**
+    * @var datetime $naissance
+    *
+    * @ORM\Column(type="datetime")
+    */
+    private $naissance;
+    
+    
     /**
     * @var datetime $created
     *
@@ -181,11 +190,27 @@ class User extends EntityAbstract
         $this->getProfile()->setLastName($lastname);
     }
     
-    public function getLastName()
+    public function getLastname()
     {
         return $this->getProfile()->getLastName();
     }
+    
 
+    /**
+     * @param date $naissance
+     */
+    public function setNaissance($naissance)
+    {
+        $this->naissance = $naissance;
+    }
+    
+    /**
+     * @return date
+     */
+    public function getNaissance()
+    {
+        return $this->naissance;
+    }
 
 
 }

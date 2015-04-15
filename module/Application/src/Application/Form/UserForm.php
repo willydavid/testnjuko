@@ -88,6 +88,21 @@ class UserForm extends Form implements ObjectManagerAwareInterface
                 )
             )
         ));
+        
+
+        $this->add(array(
+            'name' => 'naissance',
+            'type' => 'date',
+            'attributes' => array(),
+            'options' => array(
+                'format' => 'dd/mm/YYYY',
+                'label' => '__label_user_naissance',
+                'label_attributes' => array(
+                    'class' => 'control-label'
+                )
+            )
+        ));
+        
 
         $this->add(array(
             'name' => 'submit',

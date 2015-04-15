@@ -36,6 +36,14 @@ echo $this->form()->openTag($form);
         </div>
     </div>
 
+    <div class="control-group">
+        <?= $this->formLabel($form->get('naissance')); ?>
+        <div class="controls">
+            <?= $this->formElement($form->get('naissance')); ?>
+            <span class="help-block errors"><?= $this->formElementErrors($form->get('naissance')); ?></span>
+        </div>
+    </div>
+
     <div class="form-actions">
         <?= $this->formSubmit($form->get('submit')); ?>
     </div>
