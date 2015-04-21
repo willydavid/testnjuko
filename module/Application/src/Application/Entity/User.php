@@ -40,11 +40,18 @@ class User extends EntityAbstract
 
     
     /**
-    * @var datetime $naissance
+    * @var datetime $birthday
     *
-    * @ORM\Column(type="datetime")
+    * @ORM\Column(type="date")
     */
-    private $naissance;
+    private $birthday;
+    
+    
+    /**
+     * @var string $postaladdress
+    * @ORM\Column(type="string", length=128)
+    */
+    private $postaladdress;
     
     
     /**
@@ -197,19 +204,35 @@ class User extends EntityAbstract
     
 
     /**
-     * @param date $naissance
+     * @param date $birthday
      */
-    public function setNaissance($naissance)
+    public function setBirthday($birthday)
     {
-        $this->naissance = $naissance;
+        $this->birthday = $birthday;
     }
     
     /**
      * @return date
      */
-    public function getNaissance()
+    public function getBirthday()
     {
-        return $this->naissance;
+        return $this->birthday;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getPostaladdress()
+    {
+        return $this->postaladdress;
+    }
+    
+    /**
+     * @param string $postalAddress
+     */
+    public function setPostaladdress($postalAddress)
+    {
+        $this->postaladdress = $postalAddress;
     }
 
 

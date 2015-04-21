@@ -19,12 +19,7 @@ class UserController extends AbstractActionController
 
         $users = $this->getServiceLocator()->get('entity_manager')
             ->getRepository('Application\Entity\User')
-            ->findBy(array(), array('naissance' => 'asc'), $limite = null, $offset = null);
-        
-        $profiles = $this->getServiceLocator()->get('entity_manager')
-            ->getRepository('Application\Entity\Profile')
-            ->findBy(array(), array('lastname' => 'asc'), $limite = null, $offset = null);
-            //->findAll();
+            ->findAll();
         
         return new ViewModel(array(
             'users' =>  $users
@@ -96,20 +91,25 @@ class UserController extends AbstractActionController
         $form->get('firstname')->setValue($userToEdit->getFirstname());
         
         $form->get('lastname')->setValue($userToEdit->getLastname());
-        $form->get('naissance')->setValue($userToEdit->getNaissance());
-
+        $form->get('birthday')->setValue($userToEdit->getBirthday());
+        $form->get('postaladdress')->setValue($userToEdit->getPostaladdress());
+        
         $data = $this->prg();
 
         if ($data instanceof \Zend\Http\PhpEnvironment\Response) {
             return $data;
         }
-
+        
         if ($data != false) {
             $form->setData($data);
             if ($form->isValid()) {
+                
+                
 
                 /* @var $user \Application\Entity\User */
                 $user = $form->getData();
+                
+                //var_dump($user); exit();
 
                 //Save the user
                 /* @var $serviceUser \Application\Service\UserService */

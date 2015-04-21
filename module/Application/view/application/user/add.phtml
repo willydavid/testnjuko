@@ -37,12 +37,21 @@ echo $this->form()->openTag($form);
     </div>
 
     <div class="control-group">
-        <?= $this->formLabel($form->get('naissance')); ?>
+        <?= $this->formLabel($form->get('birthday')); ?>
         <div class="controls">
-            <?= $this->formElement($form->get('naissance')); ?>
-            <span class="help-block errors"><?= $this->formElementErrors($form->get('naissance')); ?></span>
+            <?= $this->formElement($form->get('birthday')); ?>
+            <span class="help-block errors"><?= $this->formElementErrors($form->get('birthday')); ?></span>
         </div>
     </div>
+
+    <div class="control-group">
+        <?= $this->formLabel($form->get('postaladdress')); ?>
+        <div class="controls">
+            <?= $this->formElement($form->get('postaladdress')); ?>
+            <span class="help-block errors"><?= $this->formElementErrors($form->get('postaladdress')); ?></span>
+        </div>
+    </div>
+
 
     <div class="form-actions">
         <?= $this->formSubmit($form->get('submit')); ?>

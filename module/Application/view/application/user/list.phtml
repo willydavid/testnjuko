@@ -5,7 +5,7 @@
 <br/>
 <br/>
 
-<table>
+<table id="utilisateurs"  class="table tablesorter">
     <thead>
         <tr>
             <th>
@@ -21,16 +21,19 @@
                 <?=$this->translate('__user_email')?>
             </th>
             <th>
-                <?=$this->translate('__user_naissance')?>
+                <?=$this->translate('__user_birthday')?>
             </th>
-            <th></th>
+            <th>
+                <?=$this->translate('__user_postaladdress')?>
+            </th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
     <?php
     /* @var $user \Application\Entity\User */
     foreach($this->users as $user)
-    {
+    {   
         ?>
         <tr>
         <td>
@@ -48,7 +51,10 @@
             </a>
         </td>
         <td>
-            <?= $this->dateFormat($user['naissance'], IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE, 'fr_FR') ?>
+            <?= $this->dateFormat($user['birthday'], IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE, 'fr_FR') ?>
+        </td>
+        <td>
+            <?=$user['postaladdress']?>
         </td>
         <td>
             <a href="<?=$this->url('users/edit', array('user_id'   =>  $user['id']))?>" class="btn btn-success">
@@ -64,3 +70,12 @@
     ?>
     </tbody>
 </table>
+
+
+<script>
+$(document).ready(function()
+    { 
+        $("#utilisateurs").tablesorter(); 
+    } 
+);
+</script>
